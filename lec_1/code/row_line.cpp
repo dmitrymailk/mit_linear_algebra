@@ -12,18 +12,26 @@ int *row_mul(int matrix[2][2], int *vector)
       rows[j] = rows[j] + num;
     }
   }
-  for (int i = 0; i < 2; i++)
-    cout << rows[i] << "\n";
-  return rows;
+  memcpy(vector, rows, sizeof(rows) / sizeof(rows[0]) * sizeof(int));
+  return vector;
 }
-/*
-[
-  [2, 5],
-  [1, 3]
-]
-x
-[1, 2]
-*/
+
+int *line_mul(int matrix[2][2], int *vector)
+{
+  int lines[] = {0, 0};
+  for (int i = 0; i < 2; i++)
+  {
+    int temp_num = 0;
+    for (int j = 0; j < 2; j++)
+    {
+      temp_num += matrix[i][j] * vector[j];
+    }
+
+    lines[i] = temp_num;
+  }
+  memcpy(vector, lines, sizeof(lines) / sizeof(lines[0]) * sizeof(int));
+  return vector;
+}
 
 int main()
 {
